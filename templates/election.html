@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Election Details</title>
+</head>
+<body>
+    <h1>Election Details</h1>
+    <h2>Admin Details</h2>
+    <p>Name: {{ admin_name }}</p>
+    <p>Email: {{ admin_email }}</p>
+    <p>Title: {{ admin_title }}</p>
+    <h2>Election Details</h2>
+    <p>Title: {{ election_title }}</p>
+    <p>Organization: {{ organization_title }}</p>
+    <h2>Election Status</h2>
+    <p>Start: {{ start }}</p>
+    <p>End: {{ end }}</p>
+    <h2>Candidates</h2>
+    <ul>
+        {% for candidate in candidates %}
+            <li>{{ candidate }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Add Candidate</h2>
+    <form action="/add_candidate" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+        <label for="slogan">Slogan:</label>
+        <input type="text" name="slogan" id="slogan" required>
+        <button type="submit">Add Candidate</button>
+    </form>
+    <h2>Vote</h2>
+    <form action="/vote" method="post">
+        <label for="candidate_id">Select Candidate:</label>
+        <select name="candidate_id" id="candidate_id">
+            {% for candidate in candidates %}
+                <option value="{{ candidate.id }}">{{ candidate.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Vote</button>
+    </form>
+</body>
+</html>
